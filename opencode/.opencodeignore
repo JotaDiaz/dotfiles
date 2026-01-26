@@ -1,0 +1,42 @@
+# varios
+.git/
+.github/
+.vscode/
+.idea/
+node_modules/
+dist/
+build/
+
+# django 
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+db.sqlite3
+media/
+static/
+*.log
+
+# c
+*.o
+*.obj
+*.so
+*.a
+*.lib
+bin/
+obj/
+out/
+*.exe
+*.out
+*.app
+
+# media
+*.pdf
+*.jpg
+*.png
+*.gif
+*.svg
+*.mp4
+docs/_build/
