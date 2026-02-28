@@ -1,19 +1,20 @@
 # --- CONFIGURACIÓN BÁSICA ZSH ---
-autoload -Uz compinit && compinit       # Autocompletado inteligente
-setopt autocd                           # cd escribiendo solo el nombre de la carpeta
-setopt interactive_comments             # Permitir comentarios en la shell interactiva
-setopt prompt_subst
+autoload -Uz compinit && compinit       
+setopt autocd                           
+setopt interactive_comments             
+setopt prompt_subst                     
 
 # --- HISTORIAL ---
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt append_history       # Añadir al historial, no sobreescribir
-setopt hist_ignore_all_dups # No guardar duplicados
-setopt share_history        # Compartir historial entre terminales abiertas
+setopt append_history       
+setopt hist_ignore_all_dups 
+setopt share_history       
 
 # --- COLORES Y PROMPT ---
 autoload -U colors && colors
+autoload -U add-zsh-hook    # IMPORTANTE: Cargamos la herramienta primero
 
 # Función para Git 
 parse_git_branch() {
@@ -37,9 +38,8 @@ set_prompt() {
     PROMPT="%F{magenta}\$(parse_venv)%f%F{green}%n@%m%f:%F{blue}%~%f%F{yellow}\$(parse_git_branch)%f ${symbol} "
 }
 
-# En Zsh usamos precmd para actualizar el prompt dinámicamente
-add-zsh-hook precmd set_prompt
-autoload -U add-zsh-hook
+
+add-zsh-hook precmd set_prompt # AHORA SÍ: La usamos
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # --- ALIAS ---
@@ -99,3 +99,8 @@ export NVM_DIR="$HOME/.nvm"
 if [[ -x /usr/bin/dircolors ]]; then
     eval "$(dircolors -b)"
 fi
+
+# --- CORRECCIÓN DE TECLAS  ---
+bindkey  '^[[H'   beginning-of-line
+bindkey  '^[[F'   end-of-line
+bindkey  '^[[3~'  delete-char
